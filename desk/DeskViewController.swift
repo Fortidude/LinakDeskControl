@@ -14,9 +14,18 @@ class DeskViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.deskConnect = DeskConnect()
+        
+        self.deskConnect.currentPosition.asObservable().subscribe({ value in
+            self.valueLabel.stringValue = "\(value.element ?? 0)"
+        }).disposed(by: self.deskConnect.dispose)
+        
+        self.deskConnect.deviceName.asObservable().subscribe({ value in
+            self.deskName.stringValue = "\(value.element ?? "Unknown desk")"
+        }).disposed(by: self.deskConnect.dispose)
     }
     
     @IBOutlet var valueLabel: NSTextField!
+    @IBOutlet var deskName: NSTextField!
     
     @IBAction func up(_ sender: NSButton) {
         self.deskConnect.moveUp()

@@ -8,6 +8,8 @@
 
 import Foundation
 import CoreBluetooth
+import RxSwift
+import RxRelay
 
 let deviceNamePattern = #"Desk[\s0-9].*"#;
 class DeskConnect: NSObject, CBPeripheralDelegate, CBCentralManagerDelegate {
@@ -21,13 +23,15 @@ class DeskConnect: NSObject, CBPeripheralDelegate, CBCentralManagerDelegate {
     private var valueMoveDown = pack("<H", [70, 0])
     private var valueStopMove = pack("<H", [255, 0])
     
-    private var currentPosition: Int!
+    let deviceName = BehaviorRelay<String>(value: "")
+    let currentPosition = BehaviorRelay<Int>(value: 0)
+    let dispose = DisposeBag()
     
     override init() {
         super.init()
         centralManager = CBCentralManager(delegate: self, queue: nil)
     }
-    
+     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if (central.state != .poweredOn) {
             print("Central is not powered on. Bluetooth disabled? @TODO")
@@ -46,6 +50,10 @@ class DeskConnect: NSObject, CBPeripheralDelegate, CBCentralManagerDelegate {
         let isDesk = deviceName?.range(of: deviceNamePattern, options:.regularExpression)
         if (isDesk?.location != NSNotFound && deviceName != nil) {
             self.centralManager.stopScan()
+            
+            if let dn = deviceName {
+                self.deviceName.accept(dn as String)
+            }
             
             self.peripheral = peripheral
             self.peripheral.delegate = self
@@ -118,9 +126,12 @@ class DeskConnect: NSObject, CBPeripheralDelegate, CBCentralManagerDelegate {
             let byteArray = [UInt8](characteristic.value!)
             if (byteArray.indices.contains(0) && byteArray.indices.contains(1)) {
                 do {
-                    let position = try unpack("<H", Data([byteArray[0], byteArray[1]]))
-                    self.currentPosition = position[0] as? Int
-                    print(self.currentPosition!)
+                    let positionWrapped = try unpack("<H", Data([byteArray[0], byteArray[1]]))
+                    if let position = positionWrapped[0] as? Int {
+                        self.currentPosition.accept(position)
+                    }
+                    
+//                    print(self.currentPosition!)
                 } catch let error as NSError {
                     print("Error, update position: \(error)")
                 }
