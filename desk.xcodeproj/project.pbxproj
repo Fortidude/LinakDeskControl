@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		892FB916248AC2EA0055E2D1 /* DeskConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892FB915248AC2EA0055E2D1 /* DeskConnect.swift */; };
 		89B309CB2475D94300204950 /* BinUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B309CA2475D94300204950 /* BinUtils.swift */; };
 		89BCA3482472E51B009C815D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BCA3472472E51B009C815D /* AppDelegate.swift */; };
 		89BCA34A2472E51B009C815D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BCA3492472E51B009C815D /* ContentView.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		892FB915248AC2EA0055E2D1 /* DeskConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeskConnect.swift; sourceTree = "<group>"; };
 		89B309CA2475D94300204950 /* BinUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinUtils.swift; sourceTree = "<group>"; };
 		89BCA3442472E51B009C815D /* desk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = desk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89BCA3472472E51B009C815D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +87,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		892FB914248AC2A60055E2D1 /* DeskController */ = {
+			isa = PBXGroup;
+			children = (
+				89BCA37E24730B27009C815D /* ParticlePeripheral.swift */,
+				89BCA37C2472FE49009C815D /* EventMonitor.swift */,
+				892FB915248AC2EA0055E2D1 /* DeskConnect.swift */,
+			);
+			path = DeskController;
+			sourceTree = "<group>";
+		};
 		89BCA33B2472E51B009C815D = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +120,7 @@
 		89BCA3462472E51B009C815D /* desk */ = {
 			isa = PBXGroup;
 			children = (
+				892FB914248AC2A60055E2D1 /* DeskController */,
 				89BCA3472472E51B009C815D /* AppDelegate.swift */,
 				89BCA3492472E51B009C815D /* ContentView.swift */,
 				89BCA34B2472E51C009C815D /* Assets.xcassets */,
@@ -117,8 +130,6 @@
 				89BCA3782472F2A9009C815D /* table.png */,
 				89BCA34D2472E51C009C815D /* Preview Content */,
 				89BCA37A2472F5A5009C815D /* DeskViewController.swift */,
-				89BCA37C2472FE49009C815D /* EventMonitor.swift */,
-				89BCA37E24730B27009C815D /* ParticlePeripheral.swift */,
 				89B309CA2475D94300204950 /* BinUtils.swift */,
 			);
 			path = desk;
@@ -286,6 +297,7 @@
 				89B309CB2475D94300204950 /* BinUtils.swift in Sources */,
 				89BCA37B2472F5A5009C815D /* DeskViewController.swift in Sources */,
 				89BCA3482472E51B009C815D /* AppDelegate.swift in Sources */,
+				892FB916248AC2EA0055E2D1 /* DeskConnect.swift in Sources */,
 				89BCA37F24730B27009C815D /* ParticlePeripheral.swift in Sources */,
 				89BCA37D2472FE49009C815D /* EventMonitor.swift in Sources */,
 			);
