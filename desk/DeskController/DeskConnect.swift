@@ -24,8 +24,10 @@ class DeskConnect: NSObject, CBPeripheralDelegate, CBCentralManagerDelegate {
     private var valueStopMove = pack("<H", [255, 0])
     
     let deviceName = BehaviorRelay<String>(value: "")
-    let currentPosition = BehaviorRelay<Int>(value: 0)
+    let currentPosition = BehaviorRelay<Double>(value: 0)
     let dispose = DisposeBag()
+    
+    let deskOffset = 62.5
     
     override init() {
         super.init()
@@ -89,6 +91,7 @@ class DeskConnect: NSObject, CBPeripheralDelegate, CBCentralManagerDelegate {
             for characteristic in characteristics {
                 self.peripheral.readValue(for: characteristic)
                 self.peripheral.setNotifyValue(true, for: characteristic)
+                
                                 
                 if (characteristic.uuid.uuidString == ParticlePeripheral.characteristicControl.uuidString) {
                     self.characteristicControl = characteristic
@@ -96,6 +99,7 @@ class DeskConnect: NSObject, CBPeripheralDelegate, CBCentralManagerDelegate {
                 
                 if (characteristic.uuid.uuidString == ParticlePeripheral.characteristicPosition.uuidString) {
                     self.characteristicPosition = characteristic
+                    self.updatePosition(characteristic: characteristic)
                 }
             }
         }
@@ -105,20 +109,16 @@ class DeskConnect: NSObject, CBPeripheralDelegate, CBCentralManagerDelegate {
         self.updatePosition(characteristic: characteristic)
     }
     
+    func turnOnContinous() {
+        
+    }
+    
     func moveUp() {
         self.peripheral.writeValue(Data(self.valueMoveUp), for: self.characteristicControl, type: CBCharacteristicWriteType.withResponse)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            self.stopMoving()
-        }
     }
     
     func moveDown() {
         self.peripheral.writeValue(Data(self.valueMoveDown), for: self.characteristicControl, type: CBCharacteristicWriteType.withResponse)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            self.stopMoving()
-        }
     }
     
     private func updatePosition(characteristic: CBCharacteristic) {
@@ -128,7 +128,10 @@ class DeskConnect: NSObject, CBPeripheralDelegate, CBCentralManagerDelegate {
                 do {
                     let positionWrapped = try unpack("<H", Data([byteArray[0], byteArray[1]]))
                     if let position = positionWrapped[0] as? Int {
-                        self.currentPosition.accept(position)
+                        
+                        let formattedPosition = round(Double(position) + (self.deskOffset * 100))
+//                        print(formattedPosition / 100)
+                        self.currentPosition.accept(formattedPosition / 100)
                     }
                     
 //                    print(self.currentPosition!)
@@ -139,7 +142,7 @@ class DeskConnect: NSObject, CBPeripheralDelegate, CBCentralManagerDelegate {
         }
     }
     
-    private func stopMoving() {
+    func stopMoving() {
         self.peripheral.writeValue(Data(self.valueStopMove), for: self.characteristicControl, type: CBCharacteristicWriteType.withResponse)
     }
 }

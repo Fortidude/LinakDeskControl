@@ -3,24 +3,22 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		3244358F91275A1E68BCA5A6 /* Pods_desk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B7F63090E02947F5F6993D /* Pods_desk.framework */; };
 		533F7B8C1842D82722133DD1 /* Pods_deskTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C407C57D686216C44FBAFBB9 /* Pods_deskTests.framework */; };
 		892FB916248AC2EA0055E2D1 /* DeskConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892FB915248AC2EA0055E2D1 /* DeskConnect.swift */; };
+		896C0E80248BE5D100578941 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896C0E7F248BE5D100578941 /* EventMonitor.swift */; };
 		89B309CB2475D94300204950 /* BinUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B309CA2475D94300204950 /* BinUtils.swift */; };
 		89BCA3482472E51B009C815D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BCA3472472E51B009C815D /* AppDelegate.swift */; };
-		89BCA34A2472E51B009C815D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BCA3492472E51B009C815D /* ContentView.swift */; };
 		89BCA34C2472E51C009C815D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89BCA34B2472E51C009C815D /* Assets.xcassets */; };
-		89BCA34F2472E51C009C815D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89BCA34E2472E51C009C815D /* Preview Assets.xcassets */; };
 		89BCA3522472E51C009C815D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89BCA3502472E51C009C815D /* Main.storyboard */; };
 		89BCA35E2472E51C009C815D /* deskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BCA35D2472E51C009C815D /* deskTests.swift */; };
 		89BCA3692472E51C009C815D /* deskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BCA3682472E51C009C815D /* deskUITests.swift */; };
 		89BCA3792472F2AA009C815D /* table.png in Resources */ = {isa = PBXBuildFile; fileRef = 89BCA3782472F2A9009C815D /* table.png */; };
 		89BCA37B2472F5A5009C815D /* DeskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BCA37A2472F5A5009C815D /* DeskViewController.swift */; };
-		89BCA37D2472FE49009C815D /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BCA37C2472FE49009C815D /* EventMonitor.swift */; };
 		89BCA37F24730B27009C815D /* ParticlePeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BCA37E24730B27009C815D /* ParticlePeripheral.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,12 +44,11 @@
 		4DF47CCA12A7BD5C2D7AA387 /* Pods-deskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-deskTests.debug.xcconfig"; path = "Target Support Files/Pods-deskTests/Pods-deskTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6268E187AE56B61FCA99580A /* Pods-deskTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-deskTests.release.xcconfig"; path = "Target Support Files/Pods-deskTests/Pods-deskTests.release.xcconfig"; sourceTree = "<group>"; };
 		892FB915248AC2EA0055E2D1 /* DeskConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeskConnect.swift; sourceTree = "<group>"; };
+		896C0E7F248BE5D100578941 /* EventMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
 		89B309CA2475D94300204950 /* BinUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinUtils.swift; sourceTree = "<group>"; };
 		89BCA3442472E51B009C815D /* desk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = desk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89BCA3472472E51B009C815D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		89BCA3492472E51B009C815D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		89BCA34B2472E51C009C815D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		89BCA34E2472E51C009C815D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		89BCA3512472E51C009C815D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		89BCA3532472E51C009C815D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89BCA3542472E51C009C815D /* desk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = desk.entitlements; sourceTree = "<group>"; };
@@ -63,7 +60,6 @@
 		89BCA36A2472E51C009C815D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89BCA3782472F2A9009C815D /* table.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table.png; sourceTree = "<group>"; };
 		89BCA37A2472F5A5009C815D /* DeskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeskViewController.swift; sourceTree = "<group>"; };
-		89BCA37C2472FE49009C815D /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
 		89BCA37E24730B27009C815D /* ParticlePeripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticlePeripheral.swift; sourceTree = "<group>"; };
 		9BA38D4D1449B8631FE186B6 /* Pods-desk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-desk.debug.xcconfig"; path = "Target Support Files/Pods-desk/Pods-desk.debug.xcconfig"; sourceTree = "<group>"; };
 		A9ADE9ECDE2FB81BC7FBA812 /* Pods-desk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-desk.release.xcconfig"; path = "Target Support Files/Pods-desk/Pods-desk.release.xcconfig"; sourceTree = "<group>"; };
@@ -101,7 +97,6 @@
 			isa = PBXGroup;
 			children = (
 				89BCA37E24730B27009C815D /* ParticlePeripheral.swift */,
-				89BCA37C2472FE49009C815D /* EventMonitor.swift */,
 				892FB915248AC2EA0055E2D1 /* DeskConnect.swift */,
 			);
 			path = DeskController;
@@ -134,25 +129,16 @@
 			children = (
 				892FB914248AC2A60055E2D1 /* DeskController */,
 				89BCA3472472E51B009C815D /* AppDelegate.swift */,
-				89BCA3492472E51B009C815D /* ContentView.swift */,
 				89BCA34B2472E51C009C815D /* Assets.xcassets */,
 				89BCA3502472E51C009C815D /* Main.storyboard */,
+				896C0E7F248BE5D100578941 /* EventMonitor.swift */,
 				89BCA3532472E51C009C815D /* Info.plist */,
 				89BCA3542472E51C009C815D /* desk.entitlements */,
 				89BCA3782472F2A9009C815D /* table.png */,
-				89BCA34D2472E51C009C815D /* Preview Content */,
 				89BCA37A2472F5A5009C815D /* DeskViewController.swift */,
 				89B309CA2475D94300204950 /* BinUtils.swift */,
 			);
 			path = desk;
-			sourceTree = "<group>";
-		};
-		89BCA34D2472E51C009C815D /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				89BCA34E2472E51C009C815D /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		89BCA35C2472E51C009C815D /* deskTests */ = {
@@ -190,7 +176,6 @@
 				4DF47CCA12A7BD5C2D7AA387 /* Pods-deskTests.debug.xcconfig */,
 				6268E187AE56B61FCA99580A /* Pods-deskTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -304,7 +289,6 @@
 			files = (
 				89BCA3792472F2AA009C815D /* table.png in Resources */,
 				89BCA3522472E51C009C815D /* Main.storyboard in Resources */,
-				89BCA34F2472E51C009C815D /* Preview Assets.xcassets in Resources */,
 				89BCA34C2472E51C009C815D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,13 +395,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89BCA34A2472E51B009C815D /* ContentView.swift in Sources */,
 				89B309CB2475D94300204950 /* BinUtils.swift in Sources */,
 				89BCA37B2472F5A5009C815D /* DeskViewController.swift in Sources */,
 				89BCA3482472E51B009C815D /* AppDelegate.swift in Sources */,
+				896C0E80248BE5D100578941 /* EventMonitor.swift in Sources */,
 				892FB916248AC2EA0055E2D1 /* DeskConnect.swift in Sources */,
 				89BCA37F24730B27009C815D /* ParticlePeripheral.swift in Sources */,
-				89BCA37D2472FE49009C815D /* EventMonitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,7 +569,6 @@
 				CODE_SIGN_ENTITLEMENTS = desk/desk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"desk/Preview Content\"";
 				DEVELOPMENT_TEAM = R3V78XR6AA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -611,7 +593,6 @@
 				CODE_SIGN_ENTITLEMENTS = desk/desk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"desk/Preview Content\"";
 				DEVELOPMENT_TEAM = R3V78XR6AA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
