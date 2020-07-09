@@ -11,6 +11,7 @@ import Cocoa
 class DeskViewController: NSViewController {
     private var deskConnect: DeskConnect!
     private var longClick: NSPressGestureRecognizer?
+    private var userDefaults: UserDefaults?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +23,8 @@ class DeskViewController: NSViewController {
         self.deskConnect.currentPosition.asObservable().subscribe({ value in
             if let position = value.element {
                 if (position > 0) {
-//                    print(position)
                     self.currentValue.stringValue = String(format:"%.1f", position)
+                    self.currentPosition = position
                 }
             }
             
@@ -35,6 +36,9 @@ class DeskViewController: NSViewController {
             self.buttonDown.isEnabled = true
         }).disposed(by: self.deskConnect.dispose)
         
+        self.userDefaults = UserDefaults.init(suiteName: "positions")
+        self.initSavedPositions()
+        
         self.buttonUp.sendAction(on: .leftMouseDown)
         self.buttonUp.isContinuous = true
         self.buttonUp.setPeriodicDelay(0, interval: 0.7)
@@ -45,6 +49,7 @@ class DeskViewController: NSViewController {
     }
     
     
+    var currentPosition: Double!
     @IBOutlet var currentValue: NSTextField!
     @IBOutlet var deskName: NSTextField!
     @IBOutlet var buttonUp: NSButton!
@@ -53,6 +58,11 @@ class DeskViewController: NSViewController {
     @IBOutlet var buttonMoveToSit: NSButton!
     @IBOutlet var buttonMoveToStand: NSButton!
     
+    @IBOutlet var sitPosition: NSTextField!
+    @IBOutlet var standPosition: NSTextField!
+    
+    var isMovingToPositionValue = false
+    var moveToPositionValue = 70.0
     
     var isWaitingForSecondPress = false
     @objc func stopMoving() {
@@ -84,6 +94,43 @@ class DeskViewController: NSViewController {
         self.handleStopMovingIfSingleClick()
     }
     
+    @IBAction func saveAsSitPosition(_ sender: NSButton) {
+        self.userDefaults?.set(self.currentPosition, forKey: "sit-position")
+        self.sitPosition.stringValue = String(format:"%.1f", self.currentPosition)
+    }
+    
+    @IBAction func saveAsStandPosition(_ sender: NSButton) {
+        self.userDefaults?.set(self.currentPosition, forKey: "stand-position")
+        self.standPosition.stringValue = String(format:"%.1f", self.currentPosition)
+    }
+    
+    @IBAction func moveToSitPosition(_ sender: NSButton) {
+        let position = self.userDefaults?.double(forKey: "sit-position") ?? .nan
+        if (position != .nan) {
+            self.deskConnect.moveToPosition(position: position)
+        }
+    }
+    
+    @IBAction func moveToStandPosition(_ sender: NSButton) {
+        let position = self.userDefaults?.double(forKey: "stand-position") ?? .nan
+        if (position != .nan) {
+            self.deskConnect.moveToPosition(position: position)
+        }
+    }
+    
+    @IBAction func stop(_ sender: NSButton) {
+        self.deskConnect.stopMoving()
+    }
+    
+    private func initSavedPositions() {
+        if let sitPosition = self.userDefaults?.double(forKey: "sit-position") {
+            self.sitPosition.stringValue = String(format:"%.1f", sitPosition)
+        }
+        
+        if let standPosition = self.userDefaults?.double(forKey: "stand-position") {
+            self.standPosition.stringValue = String(format:"%.1f", standPosition)
+        }
+    }
 }
 
 extension DeskViewController {

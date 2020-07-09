@@ -23,6 +23,9 @@ class DeskConnect: NSObject, CBPeripheralDelegate, CBCentralManagerDelegate {
     private var valueMoveDown = pack("<H", [70, 0])
     private var valueStopMove = pack("<H", [255, 0])
     
+    private var moveToPositionValue: Double? = nil
+    private var moveToPositionTimer: Timer?
+    
     let deviceName = BehaviorRelay<String>(value: "")
     let currentPosition = BehaviorRelay<Double>(value: 0)
     let dispose = DisposeBag()
@@ -114,10 +117,12 @@ class DeskConnect: NSObject, CBPeripheralDelegate, CBCentralManagerDelegate {
     }
     
     func moveUp() {
+        print("up")
         self.peripheral.writeValue(Data(self.valueMoveUp), for: self.characteristicControl, type: CBCharacteristicWriteType.withResponse)
     }
     
     func moveDown() {
+        print("down")
         self.peripheral.writeValue(Data(self.valueMoveDown), for: self.characteristicControl, type: CBCharacteristicWriteType.withResponse)
     }
     
@@ -129,12 +134,19 @@ class DeskConnect: NSObject, CBPeripheralDelegate, CBCentralManagerDelegate {
                     let positionWrapped = try unpack("<H", Data([byteArray[0], byteArray[1]]))
                     if let position = positionWrapped[0] as? Int {
                         
-                        let formattedPosition = round(Double(position) + (self.deskOffset * 100))
-//                        print(formattedPosition / 100)
-                        self.currentPosition.accept(formattedPosition / 100)
+                        let formattedPosition = (round(Double(position) + (self.deskOffset * 100)) / 100)
+                        let roundedPosition = round(formattedPosition / 0.5) * 0.5
+                        self.currentPosition.accept(roundedPosition)
+                                                
+                        let requiredPosition = self.moveToPositionValue ?? .nan
+                        if (requiredPosition != .nan) {
+                            if (formattedPosition > (requiredPosition - 0.75) && formattedPosition < (requiredPosition + 0.75)) {
+                                self.moveToPositionTimer?.invalidate()
+                                self.moveToPositionValue = nil
+                                self.stopMoving()
+                            }
+                        }
                     }
-                    
-//                    print(self.currentPosition!)
                 } catch let error as NSError {
                     print("Error, update position: \(error)")
                 }
@@ -142,7 +154,30 @@ class DeskConnect: NSObject, CBPeripheralDelegate, CBCentralManagerDelegate {
         }
     }
     
-    func stopMoving() {
+    @objc func stopMoving() {
         self.peripheral.writeValue(Data(self.valueStopMove), for: self.characteristicControl, type: CBCharacteristicWriteType.withResponse)
+    }
+    
+    func moveToPosition(position: Double) {
+        self.moveToPositionValue = position
+        self.handleMoveToPosition()
+        
+        self.moveToPositionTimer = Timer.scheduledTimer(withTimeInterval: 0.7, repeats: true) { (Timer) in
+            print("moving", self.currentPosition.value)
+            if (self.moveToPositionValue == nil) {
+                Timer.invalidate()
+            } else {
+                self.handleMoveToPosition()
+            }
+        }
+    }
+    
+    private func handleMoveToPosition() {
+        let positionRequired = self.moveToPositionValue ?? .nan
+        if (positionRequired < self.currentPosition.value) {
+            self.moveDown()
+        } else if (positionRequired > self.currentPosition.value) {
+            self.moveUp()
+        }
     }
 }
